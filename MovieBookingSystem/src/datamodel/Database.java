@@ -229,7 +229,13 @@ public class Database {
   		return dateList;
   	}
 
-  	
+  	/**
+  	 * MAKA DA BOOKINGU!!!
+  	 * @param uName
+  	 * @param movie
+  	 * @param date
+  	 * @return
+  	 */
   	public int makeBooking(String uName, String movie , String date){
   		int bookingNbr = 0;
   		String bookingString = "Select MAX(nbr) from bookings where movie = ? and showday = ?";

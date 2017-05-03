@@ -74,9 +74,13 @@ public class BookingTab {
 				(event) -> {
 					String movie = moviesList.getSelectionModel().getSelectedItem();
 					String date = datesList.getSelectionModel().getSelectedItem();
+					if(crtShow.getSeats() == 0){
+						showFreeSeats.setText("-");
+					}else{
 					int resNbr = db.makeBooking(CurrentUser.instance().getCurrentUserId(), movie , date);
 					fillShow(movie, date);
 					report("Reservation number " +resNbr+ " to "+movie+" on "+date);
+					}
 				});
 		
 		report("Ready.");
@@ -141,8 +145,12 @@ public class BookingTab {
 		showTitle.setText(crtShow.getTitle());
 		showDate.setText(crtShow.getDate());
 		showVenue.setText(crtShow.getVenue());
-		if(crtShow.getSeats() >= 0) showFreeSeats.setText(crtShow.getSeats().toString());
-		else showFreeSeats.setText("-");
+		if(crtShow.getSeats() >= 0){ 
+			showFreeSeats.setText(crtShow.getSeats().toString());
+		}
+		else{ 
+			showFreeSeats.setText("-");
+		}
 	}
 	
 	// called in case the user logged in changed
