@@ -102,7 +102,23 @@ package kookies.model;
 	    }
 	    
 	    public List<Cookie> getCookieList(){
-	    	//TODO make it do things
+	    	ArrayList<Cookie> cookieList = new ArrayList<Cookie>();
+	    	String cookies = "select * from cookies;";
+	    	Statement statement = null;
+	    	try{
+	    		statement = conn.createStatement();
+	    		ResultSet cookieListRS = statement.executeQuery(cookies);
+	    		while(cookieListRS.next()){
+	    			cookieList.add(new Cookie(cookieListRS.getString(1)));
+	    		}
+	    		cookieListRS.close();
+	    		statement.close();
+	    		for(Cookie c : cookieList){
+	    			System.out.println(c.getName());
+	    		}
+	    	}catch(SQLException e){
+	    		e.printStackTrace();
+	    	}
 	    	return new ArrayList<Cookie>();
 	    }
 	    
