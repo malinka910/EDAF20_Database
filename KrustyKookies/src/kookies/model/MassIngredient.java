@@ -1,4 +1,4 @@
-package model;
+package kookies.model;
 
 public class MassIngredient implements Ingredient {
 	
