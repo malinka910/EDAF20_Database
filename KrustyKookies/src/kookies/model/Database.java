@@ -1,4 +1,4 @@
-package model;
+package kookies.model;
 	
 	import java.sql.*;
 	import java.util.ArrayList;

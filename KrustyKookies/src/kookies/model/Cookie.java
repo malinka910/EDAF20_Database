@@ -1,4 +1,4 @@
-package model;
+package kookies.model;
 
 import java.util.ArrayList;
 import java.util.List;
