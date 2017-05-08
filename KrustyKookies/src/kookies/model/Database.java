@@ -22,12 +22,13 @@ package kookies.model;
 	    }
 	    
 	    public Connection connect(){
-	    	Connection conn = null;
+	    	//Connection conn = null;
 	    	try {
 	    	Class.forName("com.mysql.jdbc.Driver");
 	    	conn = DriverManager.getConnection 
 	                ("jdbc:mysql://localhost/krusty_kookies",
 	                 "Greg", "");
+	    	//System.out.println("Connection Established");
 	    	}catch (SQLException e) {
 	            System.err.println(e);
 	            e.printStackTrace();
@@ -61,7 +62,7 @@ package kookies.model;
 	        	//"jdbc:mysql://" + serverName + "/" + mydatabase;
 	            Class.forName("com.mysql.jdbc.Driver");
 	            conn = DriverManager.getConnection 
-	                ("jdbc:mysql://localhost/Lab_database", userName, password);
+	                ("jdbc:mysql://localhost/krusty_kookies", userName, password);
 	        }
 	        catch (SQLException e) {
 	            System.err.println(e);
@@ -105,8 +106,11 @@ package kookies.model;
 	    	ArrayList<Cookie> cookieList = new ArrayList<Cookie>();
 	    	String cookies = "select * from cookies;";
 	    	Statement statement = null;
+	    	
 	    	try{
-	    		statement = conn.createStatement();
+
+	    		statement = conn.createStatement();	    		
+	    		//System.out.println(conn.isClosed());
 	    		ResultSet cookieListRS = statement.executeQuery(cookies);
 	    		while(cookieListRS.next()){
 	    			cookieList.add(new Cookie(cookieListRS.getString(1)));
@@ -119,12 +123,34 @@ package kookies.model;
 	    	}catch(SQLException e){
 	    		e.printStackTrace();
 	    	}
-	    	return new ArrayList<Cookie>();
+	    	for(Cookie c : cookieList){
+	    		c.addRecipe(getRecipe(c.getName()));
+	    	}
+	    	return cookieList;
 	    }
 	    
-	    public List<Ingredient> getIngredientList(){
-	    	//TODO
-	    	return new ArrayList<Ingredient>();
+	    private List<Ingredient> getRecipe(String cookie){
+	    	StringBuilder builder = new StringBuilder();
+	    	builder.append("'");
+	    	builder.append(cookie);
+	    	builder.append("'");
+	    	IngredientFactory factory = new IngredientFactory();
+	    	ArrayList<Ingredient> recipe = new ArrayList<Ingredient>();
+	    	String recipeByCookie = "select * from recipes where cookieName ="+builder.toString()+ ";";
+	    	Statement statement = null;
+	    	
+	    	try{
+	    		statement = conn.createStatement();
+	    		ResultSet recipeRS = statement.executeQuery(recipeByCookie);
+	    		while(recipeRS.next()){
+	    			recipe.add(factory.buildIngredientObject(recipeRS.getString(2), recipeRS.getDouble(3)));
+	    		}
+	    		recipeRS.close();
+	    		statement.close();
+	    	}catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	return recipe;
 	    }
 
 }
