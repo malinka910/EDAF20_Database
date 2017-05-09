@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import kookies.model.Database;
 
 public class MainApp extends Application {
 	
@@ -22,36 +23,42 @@ public class MainApp extends Application {
 		initRootLayout();
 		
 		showProductionScreen();
+		Database db = new Database();
 	}
 	
 	public void initRootLayout(){
 		try{
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+			//FXMLLoader loader = new FXMLLoader();
+			//loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/RootLayout.fxml"));
+			System.out.println("root layout path");
 			rootLayout = (BorderPane) loader.load();
+			System.out.println("root layout loaded");
 			
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
+			System.out.println("scene made");
 			primaryStage.show();
+			System.out.println("scene shown");
 		}catch(IOException e){
 			System.out.println("ROOT LAYOUT EXCEPTION");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
 	
 	public void showProductionScreen(){
 		try{
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/ProductionScreen.fxml"));
-			//
+			//FXMLLoader loader = new FXMLLoader();
+			//loader.setLocation(MainApp.class.getResource("view/ProductionScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ProductionScreen.fxml"));
 			AnchorPane productionScreen = (AnchorPane) loader.load();
 			
 			rootLayout.setCenter(productionScreen);
 			
 		}catch(IOException e){
 			System.out.println("PRODUCTION SCREEN EXCEPTION");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
