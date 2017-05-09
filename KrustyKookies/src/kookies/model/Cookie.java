@@ -8,10 +8,13 @@ public class Cookie {
 	private ArrayList<Ingredient> recipe;
 	private String name;
 	
-	public Cookie(String name, List<Ingredient> recipeIngredients){
+	public Cookie(String name){
+		 this.name = name;
+	}
+	
+	public void addRecipe(List<Ingredient> recipeIngredients){
 		 recipe = new ArrayList<Ingredient>();
 		 recipe.addAll(recipeIngredients);
-		 this.name = name;
 	}
 	
 	public String getName(){
