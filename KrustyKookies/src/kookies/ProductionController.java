@@ -31,6 +31,8 @@ public class ProductionController {
 	@FXML
 	private void initialize(){
 		//lambdauttryck? sätt igång alla listviews 
+		//ingredients = new ListView<String>();
+		//text = new TextField();
 		
 	}
 	
