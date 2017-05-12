@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import kookies.model.Cookie;
 import kookies.model.Database;
 import kookies.model.Ingredient;
+import kookies.view.ProductionController;
 
 public class MainApp extends Application {
 	

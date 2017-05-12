@@ -27,7 +27,7 @@ package kookies.model;
 	    	Class.forName("com.mysql.jdbc.Driver");
 	    	conn = DriverManager.getConnection 
 	                ("jdbc:mysql://localhost/krusty_kookies",
-	                 "root", "papegoja");
+	                 "Greg", "");
 	    	//System.out.println("Connection Established");
 	    	}catch (SQLException e) {
 	            System.err.println(e);
@@ -117,9 +117,6 @@ package kookies.model;
 	    		}
 	    		cookieListRS.close();
 	    		statement.close();
-	    		for(Cookie c : cookieList){
-	    			System.out.println(c.getName());
-	    		}
 	    	}catch(SQLException e){
 	    		e.printStackTrace();
 	    	}
