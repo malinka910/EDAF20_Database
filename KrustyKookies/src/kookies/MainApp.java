@@ -20,7 +20,7 @@ public class MainApp extends Application {
 	
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	private ObservableList<Cookie> cookieType = FXCollections.observableArrayList();//temp
+	
 	private ArrayList<Ingredient> list = new ArrayList<Ingredient>();//temp
 
 	@Override
@@ -56,18 +56,10 @@ public class MainApp extends Application {
 	
 	public MainApp(){//temp
 		
-		cookieType.add(new Cookie("Nut Ring"));
-		cookieType.add(new Cookie("Nut Cookie"));
-		cookieType.add(new Cookie("Tango"));
-		cookieType.add(new Cookie("Amneris"));
-		cookieType.add(new Cookie("Almond Delight"));
-		cookieType.add(new Cookie("Berliner"));
 		
 		
 	}
-	public ObservableList<Cookie> getCookieType(){//temp
-		return cookieType;
-	}
+	
 	public void showProductionScreen(){
 		try{
 			//FXMLLoader loader = new FXMLLoader();

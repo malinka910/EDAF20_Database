@@ -1,13 +1,18 @@
 package kookies;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import kookies.model.Cookie;
+import kookies.model.Database;
 
 public class ProductionController {
+	
+	Database db = new Database();
 	
 	@FXML
 	private Button add;
@@ -23,6 +28,7 @@ public class ProductionController {
 	private TextField text;
 	
 	private MainApp mainApp;
+	private ObservableList<String> cookieName = FXCollections.observableArrayList();//temp
 	
 	public ProductionController(){
 		
@@ -30,15 +36,33 @@ public class ProductionController {
 	
 	@FXML
 	private void initialize(){
-		//lambdauttryck? sätt igång alla listviews 
-		//ingredients = new ListView<String>();
-		//text = new TextField();
+		
+//		cookieName.add(("Nut Ring"));
+//		cookieName.add(("Nut Cookie"));
+//		cookieName.add(("Tango"));
+//		cookieName.add(("Amneris"));
+//		cookieName.add(("Almond Delight"));
+//		cookieName.add(("Berliner"));	
+		
+		/**updateCookieName*/
+		db.connect();
+		for(Cookie c : db.getCookieList()){
+			cookieName.add(c.getName());
+		}
+		db.disconnect();
+		
+	}
+	@FXML
+	private void updateCookieName(){
+	
 		
 	}
 	
 	public void setMainApp(MainApp mainApp){
 		
 		this.mainApp = mainApp;
+		cookies.setItems(cookieName);
+		
 	}
 
 }
