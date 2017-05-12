@@ -33,7 +33,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                   <children>
                     <Button layoutX="321.0" layoutY="285.0" mnemonicParsing="false" text="Produce" />
-                    <ListView fx:id="cookies" onEditCommit="#initialize" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="40.0" />
+                    <ListView fx:id="cookies" onEditCommit="#updateCookieName" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="40.0" />
                     <Button minHeight="33.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Produce" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0" />
                   </children>
                 </AnchorPane>

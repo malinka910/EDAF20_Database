@@ -8,8 +8,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import kookies.model.Cookie;
+import kookies.model.Database;
 
 public class ProductionController {
+	
+	Database db = new Database();
 	
 	@FXML
 	private Button add;
@@ -34,12 +37,25 @@ public class ProductionController {
 	@FXML
 	private void initialize(){
 		
-		cookieName.add(("Nut Ring"));
-		cookieName.add(("Nut Cookie"));
-		cookieName.add(("Tango"));
-		cookieName.add(("Amneris"));
-		cookieName.add(("Almond Delight"));
-		cookieName.add(("Berliner"));		
+//		cookieName.add(("Nut Ring"));
+//		cookieName.add(("Nut Cookie"));
+//		cookieName.add(("Tango"));
+//		cookieName.add(("Amneris"));
+//		cookieName.add(("Almond Delight"));
+//		cookieName.add(("Berliner"));	
+		
+		/**updateCookieName*/
+		db.connect();
+		for(Cookie c : db.getCookieList()){
+			cookieName.add(c.getName());
+		}
+		db.disconnect();
+		
+	}
+	@FXML
+	private void updateCookieName(){
+	
+		
 	}
 	
 	public void setMainApp(MainApp mainApp){

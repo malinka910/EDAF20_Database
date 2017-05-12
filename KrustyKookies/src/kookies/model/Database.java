@@ -27,7 +27,7 @@ package kookies.model;
 	    	Class.forName("com.mysql.jdbc.Driver");
 	    	conn = DriverManager.getConnection 
 	                ("jdbc:mysql://localhost/krusty_kookies",
-	                 "Greg", "");
+	                 "root", "papegoja");
 	    	//System.out.println("Connection Established");
 	    	}catch (SQLException e) {
 	            System.err.println(e);
