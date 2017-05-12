@@ -152,5 +152,24 @@ package kookies.model;
 	    	}
 	    	return recipe;
 	    }
+	    
+	    public List<Ingredient> getIngredientStock(){
+	    	ArrayList<Ingredient> stock = new ArrayList<Ingredient>();
+	    	IngredientFactory factory = new IngredientFactory();
+	    	String query = "select * from ingredients";
+	    	
+	    	try{
+	    		Statement statement = conn.createStatement();
+	    		ResultSet stockRS = statement.executeQuery(query);
+	    		while(stockRS.next()){
+	    			stock.add(factory.buildIngredientObject(stockRS.getString(1), stockRS.getDouble(2)));
+	    		}
+	    		stockRS.close();
+	    		statement.close();
+	    	}catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	return stock;
+	    }
 
 }

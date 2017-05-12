@@ -23,6 +23,11 @@ public class TestMain {
 			}
 			
 		}
+		
+		for(Ingredient i : db.getIngredientStock()){
+			System.out.println(i.getName() + ": " + i.getAmount() + " " + i.getUnit());
+		}
+		
 		db.closeConnection();	
 	}
 
