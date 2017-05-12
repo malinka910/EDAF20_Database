@@ -1,5 +1,7 @@
 package kookies;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -23,6 +25,7 @@ public class ProductionController {
 	private TextField text;
 	
 	private MainApp mainApp;
+	private ObservableList<String> cookieName = FXCollections.observableArrayList();//temp
 	
 	public ProductionController(){
 		
@@ -30,15 +33,20 @@ public class ProductionController {
 	
 	@FXML
 	private void initialize(){
-		//lambdauttryck? sätt igång alla listviews 
-		//ingredients = new ListView<String>();
-		//text = new TextField();
 		
+		cookieName.add(("Nut Ring"));
+		cookieName.add(("Nut Cookie"));
+		cookieName.add(("Tango"));
+		cookieName.add(("Amneris"));
+		cookieName.add(("Almond Delight"));
+		cookieName.add(("Berliner"));		
 	}
 	
 	public void setMainApp(MainApp mainApp){
 		
 		this.mainApp = mainApp;
+		cookies.setItems(cookieName);
+		
 	}
 
 }
