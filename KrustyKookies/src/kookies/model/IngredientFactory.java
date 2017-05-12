@@ -7,8 +7,8 @@ public class IngredientFactory {
 	private ArrayList<String> volumeCookies = new ArrayList<String>();
 	
 	public IngredientFactory(){
-		volumeCookies.add("eggs");
-		volumeCookies.add("egg whites");
+		volumeCookies.add("Eggs");
+		volumeCookies.add("Egg whites");
 	}
 	
 	public Ingredient buildIngredientObject(String name, double amount){
