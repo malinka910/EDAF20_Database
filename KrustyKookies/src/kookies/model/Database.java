@@ -23,11 +23,12 @@ package kookies.model;
 	    
 	    public Connection connect(){
 	    	//Connection conn = null;
+	    	DBString string = new DBString();
 	    	try {
 	    	Class.forName("com.mysql.jdbc.Driver");
 	    	conn = DriverManager.getConnection 
 	                ("jdbc:mysql://localhost/krusty_kookies",
-	                 "root", "papegoja");
+	                 string.user, string.password);
 	    	//System.out.println("Connection Established");
 	    	}catch (SQLException e) {
 	            System.err.println(e);
@@ -117,9 +118,6 @@ package kookies.model;
 	    		}
 	    		cookieListRS.close();
 	    		statement.close();
-	    		for(Cookie c : cookieList){
-	    			System.out.println(c.getName());
-	    		}
 	    	}catch(SQLException e){
 	    		e.printStackTrace();
 	    	}
