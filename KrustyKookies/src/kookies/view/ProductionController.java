@@ -49,6 +49,7 @@ public class ProductionController {
 	private void initialize(){
 		
 		db.connect();
+		
 		cookieList = db.getCookieList();
 		for(Cookie c : cookieList){
 			cookieName.add(c.getName());
@@ -60,14 +61,14 @@ public class ProductionController {
 		}
 		
 		db.disconnect();
+		
 		cookies.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
 			@Override
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		        // Your action here
-		        //System.out.println("Selected item: " + newValue);
 		        cookieSelected(newValue);
 		    }
 		});
+		
 	}
 	@FXML
 	private void updateCookieName(){
@@ -76,7 +77,7 @@ public class ProductionController {
 		
 	}
 	
-	@FXML
+	//@FXML
 	private void cookieSelected(String cookieName){
 		currentCookie = cookieName;
 		cookieRecipe.clear();

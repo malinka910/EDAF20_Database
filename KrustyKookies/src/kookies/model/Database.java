@@ -23,11 +23,12 @@ package kookies.model;
 	    
 	    public Connection connect(){
 	    	//Connection conn = null;
+	    	DBString string = new DBString();
 	    	try {
 	    	Class.forName("com.mysql.jdbc.Driver");
 	    	conn = DriverManager.getConnection 
 	                ("jdbc:mysql://localhost/krusty_kookies",
-	                 "Greg", "");
+	                 string.user, string.password);
 	    	//System.out.println("Connection Established");
 	    	}catch (SQLException e) {
 	            System.err.println(e);
