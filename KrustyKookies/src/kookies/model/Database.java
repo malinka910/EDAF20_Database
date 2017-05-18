@@ -9,6 +9,8 @@ package kookies.model;
 	 */
 	public class Database {
 		
+		private TimeStamp timeStamp;
+		
 	    /** The database connection. */
 	    private Connection conn;
 	    
@@ -19,6 +21,7 @@ package kookies.model;
 	     */
 	    public Database() {
 	        conn = null;
+	        timeStamp = new TimeStamp();
 	    }
 	    
 	    public Connection connect(){
@@ -168,6 +171,53 @@ package kookies.model;
 	    		e.printStackTrace();
 	    	}
 	    	return stock;
+	    }
+	    
+	    public int ingredientStockDelivery(double amount, String ingredient){
+	    	//String updateStock = "update ingredients set amount = amount + ? where ingredient = ?";
+	    	String updateStock = "call delivery(?,?,?)";
+	    	int changes = 0;
+	    	try{
+	    		PreparedStatement statement = conn.prepareStatement(updateStock);
+	    		statement.setDouble(3, amount);
+	    		statement.setString(2, timeStamp.makeTimeStamp());
+	    		statement.setString(1, ingredient);
+	    		changes = statement.executeUpdate();
+	    	}catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	return changes;
+	    	
+	    }
+	    
+	    /*
+	    public void ingredientStockProduction(Cookie cookie){
+	    	String updateStock = "update ingredients set amount = amount - ? where ingredient = ?";
+	    	for(Ingredient ingredient : cookie.getRecipe()){
+	    		try{
+	    			PreparedStatement statement = conn.prepareStatement(updateStock);
+	    			statement.setDouble(1, ingredient.getAmount());
+	    			statement.setString(2, ingredient.getName());
+	    			statement.executeUpdate();
+	    		}catch(Exception e){
+	    			e.printStackTrace();
+	    		}
+	    	}
+	    	
+	    }
+	    */
+	    
+	    
+	    public void palletProducetion(Cookie cookie){
+	    	String producePallet = "call producePallet(?,?)";
+	    	try{
+    			PreparedStatement statement = conn.prepareStatement(producePallet);
+    			statement.setString(1, cookie.getName());
+    			statement.setString(2, timeStamp.makeTimeStamp());
+    			statement.executeUpdate();
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}
 	    }
 
 }

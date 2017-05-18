@@ -18,5 +18,12 @@ public class IngredientFactory {
 			return new MassIngredient(name, amount);
 		}
 	}
+	
+	public Ingredient parseIngredientString(String toParse){
+		String ingredient = toParse.substring(toParse.indexOf(" ")+1);
+		String am = toParse.substring(0, toParse.indexOf("("));
+		double amount = Double.parseDouble(am);
+		return buildIngredientObject(ingredient, amount);
+	}
 
 }

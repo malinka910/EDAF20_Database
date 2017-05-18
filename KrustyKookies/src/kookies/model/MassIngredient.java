@@ -4,7 +4,7 @@ public class MassIngredient implements Ingredient {
 	
 	private String name;
 	private double amount;
-	private String unit = "g";
+	private String unit = "(g)";
 	
 	public MassIngredient(String name, double amount){
 		this.name = name;

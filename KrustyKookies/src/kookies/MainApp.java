@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -31,7 +32,7 @@ public class MainApp extends Application {
 		
 		initRootLayout();
 		
-		showProductionScreen();
+		addProductionScreen();
 		Database db = new Database();
 	}
 	
@@ -55,31 +56,24 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public MainApp(){//temp
-		
-		
+	public MainApp(){
 		
 	}
 	
-	public void showProductionScreen(){
+	public void addProductionScreen(){
 		try{
-			//FXMLLoader loader = new FXMLLoader();
-			//loader.setLocation(MainApp.class.getResource("view/ProductionScreen.fxml"));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ProductionScreen.fxml"));
-
 			AnchorPane productionScreen = (AnchorPane) loader.load();
-			
 			rootLayout.setCenter(productionScreen);
-			
-			//Give the controller access to the main app
 			ProductionController controller = loader.getController();
 			controller.setMainApp(this);
-			
-			
 		}catch(IOException e){
 			System.out.println("PRODUCTION SCREEN EXCEPTION");
-			//e.printStackTrace();
 		}
+	}
+	
+	public void addStorageScreen(){
+		
 	}
 	
 	
