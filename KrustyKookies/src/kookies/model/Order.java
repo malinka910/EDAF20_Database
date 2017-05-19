@@ -12,23 +12,46 @@ public class Order {
 	private HashMap<Cookie,Pallet[]> pallets;
 	private String deliveryTimeStamp;
 	
-	public Order(Customer customer, int orderNbr, String expectedDeliveryDate){
+	public Order(Customer customer, String expectedDeliveryDate){
 		this.customer = customer;
-		this.orderNbr = orderNbr;
 		this.expectedDeliveryDate = expectedDeliveryDate;
 		pallets = new HashMap<Cookie,Pallet[]>();
+	}
+	
+	public void setOrderNbr(int orderNbr){
+		this.orderNbr = orderNbr;
 	}
 	
 	public Customer getCustomer(){
 		return customer;
 	}
 	
-	public int gerOrderNbr(){
+	public int getOrderNbr(){
 		return orderNbr;
 	}
 	
-	public void orderPallets(Cookie typeOfCookie, int number){
-		pallets.put(typeOfCookie, new Pallet[number]);
+	public String getExpectedDeliveryDate(){
+		return expectedDeliveryDate.toString();
+	}
+	
+	public int[] getPalletTotals(){
+		int[] totals = new int[6];
+		String[] cookies = {"Almond delight", "Amneris", "Berliner", "Nut cookie", "Nut ring", "Tango"};
+		for(Cookie c : pallets.keySet()){
+			for(int i = 0 ; i < 6 ; i++){
+				if(cookies[i].equals(c.getName())){
+					totals[i] = pallets.get(c).length;
+					break;
+				}
+			}
+		}
+		return totals;
+	}
+	
+	public void setPalletTotals(List<Cookie> typeOfCookie, List<Integer> number){
+		for(int i = 0 ; i < typeOfCookie.size() ; i++){
+			pallets.put(typeOfCookie.get(i), new Pallet[number.get(i)]);
+		}
 	}
 	
 	public void addPalletToOrder(Pallet pallet){
@@ -38,6 +61,7 @@ public class Order {
 			for(int i = 0 ; i < palletArray.length ; i++){
 				if(palletArray[i] == null){
 					palletArray[i] = pallet;
+					break;
 				}
 			}
 		}
@@ -76,7 +100,5 @@ public class Order {
 		}
 		return orderDetails;
 	}
-	
-	
 
 }
