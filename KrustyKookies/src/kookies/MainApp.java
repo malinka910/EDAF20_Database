@@ -16,13 +16,16 @@ import javafx.stage.Stage;
 import kookies.model.Cookie;
 import kookies.model.Database;
 import kookies.model.Ingredient;
+import kookies.view.MenuController;
+import kookies.view.OrderController;
 import kookies.view.ProductionController;
+import kookies.view.StorageController;
 
 public class MainApp extends Application {
 	
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	
+	private MenuController menuController;
 	private ArrayList<Ingredient> list = new ArrayList<Ingredient>();//temp
 
 	@Override
@@ -32,7 +35,7 @@ public class MainApp extends Application {
 		
 		initRootLayout();
 		
-		addProductionScreen();
+		loadProductionScreen();
 		Database db = new Database();
 	}
 	
@@ -41,9 +44,13 @@ public class MainApp extends Application {
 			//FXMLLoader loader = new FXMLLoader();
 			//loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/RootLayout.fxml"));
+			
 			System.out.println("root layout path");
 			rootLayout = (BorderPane) loader.load();
 			System.out.println("root layout loaded");
+			
+			menuController = loader.getController();
+			menuController.setMainApp(this);
 			
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
@@ -60,8 +67,9 @@ public class MainApp extends Application {
 		
 	}
 	
-	public void addProductionScreen(){
+	public void loadProductionScreen(){
 		try{
+			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ProductionScreen.fxml"));
 			AnchorPane productionScreen = (AnchorPane) loader.load();
 			rootLayout.setCenter(productionScreen);
@@ -72,8 +80,28 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public void addStorageScreen(){
-		
+	public void loadStorageScreen(){
+		try{
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/StorageScreen.fxml"));
+			AnchorPane StorageScreen = (AnchorPane) loader.load();
+			rootLayout.setCenter(StorageScreen);
+			StorageController controller = loader.getController();
+			controller.setMainApp(this);
+		}catch(IOException e){
+			System.out.println("PRODUCTION SCREEN EXCEPTION");
+		}
+	}
+	
+	public void loadOrderScreen(){
+		try{
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/OrderScreen.fxml"));
+			AnchorPane OrderScreen = (AnchorPane) loader.load();
+			rootLayout.setCenter(OrderScreen);
+			OrderController controller = loader.getController();
+			controller.setMainApp(this);
+		}catch(IOException e){
+			System.out.println("PRODUCTION SCREEN EXCEPTION");
+		}
 	}
 	
 	

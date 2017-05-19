@@ -11,14 +11,14 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Screen">
             <items>
-              <MenuItem mnemonicParsing="false" text="Production" />
-                  <MenuItem mnemonicParsing="false" text="Orders" />
-                  <MenuItem mnemonicParsing="false" text="Storage" />
+              <MenuItem fx:id="production" mnemonicParsing="false" onAction="#productionScreen" text="Production" />
+                  <MenuItem fx:id="orders" mnemonicParsing="false" onAction="#ordersScreen" text="Orders" />
+                  <MenuItem fx:id="storage" mnemonicParsing="false" onAction="#storageScreen" text="Storage" />
             </items>
           </Menu>
         </menus>
