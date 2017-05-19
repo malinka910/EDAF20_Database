@@ -190,30 +190,31 @@ package kookies.model;
 	    	
 	    }
 	    
-	    /*
-	    public void ingredientStockProduction(Cookie cookie){
-	    	String updateStock = "update ingredients set amount = amount - ? where ingredient = ?";
-	    	for(Ingredient ingredient : cookie.getRecipe()){
-	    		try{
-	    			PreparedStatement statement = conn.prepareStatement(updateStock);
-	    			statement.setDouble(1, ingredient.getAmount());
-	    			statement.setString(2, ingredient.getName());
-	    			statement.executeUpdate();
-	    		}catch(Exception e){
-	    			e.printStackTrace();
-	    		}
-	    	}
-	    	
-	    }
-	    */
-	    
-	    
 	    public void palletProducetion(Cookie cookie){
 	    	String producePallet = "call producePallet(?,?)";
 	    	try{
     			PreparedStatement statement = conn.prepareStatement(producePallet);
     			statement.setString(1, cookie.getName());
     			statement.setString(2, timeStamp.makeTimeStamp());
+    			statement.executeUpdate();
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}
+	    }
+	    
+	    public void placeOrder(Order order){
+	    	String customer = order.getCustomer().getName();
+	    	String expDate = order.getExpectedDeliveryDate();
+	    	int[] totals = order.getPalletTotals();
+	    	String placeOrder = "call placeOrder(?,?, ?,?,?,?,?,?)";
+	    	try{
+    			PreparedStatement statement = conn.prepareStatement(placeOrder);
+    			statement.setString(1, customer);
+    			statement.setString(2, expDate);
+    			for(int i = 0 ; i < totals.length ; i++){
+    				//System.out.println(totals[i]);
+    				statement.setInt(i+3, totals[i]);
+    			}
     			statement.executeUpdate();
     		}catch(Exception e){
     			e.printStackTrace();
