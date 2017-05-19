@@ -12,7 +12,7 @@
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="kookies.view.OrderController">
   <!-- TODO Add Nodes -->
   <children>
-    <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
           <children>
@@ -31,9 +31,9 @@
               </items>
             </SplitPane>
             <Label font="$x1" layoutX="14.0" text="Orders" AnchorPane.topAnchor="5.0" />
-            <ListView fx:id="Orders" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="67.0" />
-            <ListView fx:id="OrdersInfo" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="6.0" />
-            <Button fx:id="Delete" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="5.63" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="554.37" />
+            <ListView fx:id="Orders" prefHeight="225.0" prefWidth="274.0" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="60.0" />
+            <ListView fx:id="OrdersInfo" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0" />
+            <Button fx:id="Delete" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="555.0" />
             <Button fx:id="Delivered" mnemonicParsing="false" text="Delivered" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="555.0" />
           </children>
         </AnchorPane>
@@ -75,7 +75,7 @@
                 <Font name="System Bold" size="23.0" />
               </font>
             </Label>
-            <ChoiceBox fx:id="CustomerName" prefHeight="-1.0" prefWidth="200.0" visible="true" AnchorPane.bottomAnchor="492.37" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="59.63">
+            <ChoiceBox fx:id="CustomerName" AnchorPane.leftAnchor="15.5" AnchorPane.rightAnchor="148.5" AnchorPane.topAnchor="60.0">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -84,7 +84,6 @@
                 </FXCollections>
               </items>
             </ChoiceBox>
-            <Text layoutX="15.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name" />
           </children>
         </AnchorPane>
       </items>
