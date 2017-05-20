@@ -201,12 +201,13 @@ package kookies.model;
     			e.printStackTrace();
     		}
 	    }
-	    
+	    //TODO an order no longer has deliverytimestamp 
+	    //TODO should change db procedure to load delivered
 	    public void placeOrder(Order order){
 	    	String customer = order.getCustomer().getName();
 	    	String expDate = order.getExpectedDeliveryDate();
 	    	int[] totals = order.getPalletTotals();
-	    	String placeOrder = "call placeOrder(?,?, ?,?,?,?,?,?)";
+	    	String placeOrder = "call placeOrder(?,?,?,?,?,?,?,?)";
 	    	try{
     			PreparedStatement statement = conn.prepareStatement(placeOrder);
     			statement.setString(1, customer);
@@ -220,5 +221,117 @@ package kookies.model;
     			e.printStackTrace();
     		}
 	    }
+	    
+	    public List<Customer> getCustomerList(){
+	    	String getCustomers = "select * from customers";
+	    	ArrayList<Customer> customerList = new ArrayList<Customer>();
+	    	try{
+    			PreparedStatement statement = conn.prepareStatement(getCustomers);
+    			ResultSet customerRS = statement.executeQuery();
+    			while(customerRS.next()){
+    				customerList.add(new Customer(customerRS.getString(1), customerRS.getString(2)));
+    			}
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}
+	    	return customerList;
+	    }
+
+		public List<Pallet> getPallets() {
+			String getPallets = "select * from pallets";
+			ArrayList<Pallet> palletList = new ArrayList<Pallet>();
+			try{
+    			PreparedStatement statement = conn.prepareStatement(getPallets);
+    			ResultSet palletsRS = statement.executeQuery();
+    			while(palletsRS.next()){
+    				palletList.add(
+    					new Pallet(
+    						palletsRS.getInt(1), 
+    						new Cookie(palletsRS.getString(3)), 
+    						palletsRS.getDate(2) + " " + palletsRS.getTime(2),
+    						palletsRS.getInt(4),
+    						palletsRS.getBoolean(5),
+    						palletsRS.getBoolean(6))
+    				);
+    			}
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}
+			return palletList;
+		}
+		
+		public List<Order> getUndeliveredOrders(){
+			ArrayList<Order> undeliveredList = new ArrayList<Order>();
+			String getUndelivered = "select * from orders natural join customers where orderNbr not in (select orderNbr from loadingbills)";
+			try{
+    			PreparedStatement statement = conn.prepareStatement(getUndelivered);
+    			ResultSet undeliveredRS = statement.executeQuery();
+    			while(undeliveredRS.next()){
+    				Order o = new Order(
+    					new Customer(undeliveredRS.getString(1),undeliveredRS.getString(5)),
+    					undeliveredRS.getString(3)
+    				);
+    				o.setOrderNbr(undeliveredRS.getInt(2));
+    				System.out.println("Form DB:");
+    				for(Integer i : getNbrPallets(o.getOrderNbr())){
+    					System.out.println(i);
+    				}
+    				o.setPalletTotals(getCookieList(), getNbrPallets(o.getOrderNbr()));
+    				//for(Pallet p : getPalletsByOrderNbr(o.getOrderNbr())){
+    				//	o.addPalletToOrder(p);
+    				//}
+    				undeliveredList.add(o);
+    			}
+    		}catch(Exception e){
+    			e.printStackTrace();
+    		}
+			return undeliveredList;
+		}
+		
+		public List<Pallet> getPalletsByOrderNbr(int orderNbr){
+			ArrayList<Pallet> pallets = new ArrayList<Pallet>();
+			//TODO
+			return pallets;
+		}
+		
+		public Pallet getPalletsByPalletNbr(int palletNbr){
+			Pallet pallet = null;
+			//TODO
+			return pallet;
+		}
+		
+		public List<Integer> getNbrPallets(int orderNbr){
+			ArrayList<Integer> nbrPallets = new ArrayList<Integer>();
+			String nbrPalletsQuery = "select * from nbrPallets where orderNbr = " + orderNbr;
+			try{
+	    		Statement statement = conn.createStatement();
+	    		ResultSet nbrRS = statement.executeQuery(nbrPalletsQuery);
+	    		while(nbrRS.next()){
+	    			nbrPallets.add(nbrRS.getInt(3));
+	    		}
+	    		statement.close();
+	    	}catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+			return nbrPallets;
+		}
+		
+		public List<Load> getLoadingOrders(){
+			ArrayList<Load> loadingOrders = new ArrayList<Load>();
+			//TODO
+			return loadingOrders;
+		}
+		
+		public void assignOrderToLoad(Order order, int loadNbr){
+			if(loadNbr == 0){
+				//TODO call orderIntoALoad(null,order.getOrderNbr());
+			}else{
+				//TODO call orderIntoALoad(loadNbr,order.getOrderNbr());
+			}
+		}
+		
+		public void orderDelivered(Order order){
+			//TODO orderDelivered(order.getOrderNbr(), timeStamp.makeTimeStamp());
+		}
 
 }

@@ -18,6 +18,16 @@ public class Pallet {
 		blocked = false;
 	}
 	
+	public Pallet(int palletNbr, Cookie cookieType, String productionTimeStamp, int orderNbr, boolean loaded, boolean blocked){
+		this.palletNbr = palletNbr;
+		this.cookie = cookieType;
+		this.productionTimeStamp = productionTimeStamp;
+		//System.out.println(productionTimeStamp);
+		this.orderNbr = orderNbr;
+		this.loaded = loaded;
+		this.blocked = blocked;
+	}
+	
 	public int getPalletNbr(){
 		return palletNbr;
 	}
@@ -53,6 +63,10 @@ public class Pallet {
 	
 	public boolean isBlocked(){
 		return blocked;
+	}
+	
+	public void printAllTheThings(){
+		System.out.println(palletNbr + " " + cookie.getName() + " " + productionTimeStamp + " " + orderNbr + " " + loaded + " " + blocked);
 	}
 
 }
