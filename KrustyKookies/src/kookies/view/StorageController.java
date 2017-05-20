@@ -61,6 +61,19 @@ public class StorageController {
 		
 	}
 	
+	
+	@FXML
+	public void initialize(){
+		db.connect();
+		
+		
+		
+	}
+	public void initRootLayout(){
+		
+		
+	}
+	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		
