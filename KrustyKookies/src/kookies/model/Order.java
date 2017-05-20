@@ -10,7 +10,6 @@ public class Order {
 	private int orderNbr;
 	private String expectedDeliveryDate;
 	private HashMap<Cookie,Pallet[]> pallets;
-	private String deliveryTimeStamp;
 	
 	public Order(Customer customer, String expectedDeliveryDate){
 		this.customer = customer;
@@ -78,12 +77,18 @@ public class Order {
 		}
 	}
 	
-	public void setDeliveryTimeStamp(String timeStamp){
-		this.deliveryTimeStamp = timeStamp;
-	}
-	
-	public String getDeliveryTimeStamp(){
-		return deliveryTimeStamp.toString();
+	public void removePallet(int palletNbr){
+		for(Cookie c : pallets.keySet()){
+			int i = 0;
+			for(Pallet p : pallets.get(c)){
+				if(p.getPalletNbr() == palletNbr){
+					pallets.get(c)[i] = null;
+					break;
+				}else{
+					i++;
+				}
+			}
+		}
 	}
 	
 	public List<String> getOrderDetails(){
