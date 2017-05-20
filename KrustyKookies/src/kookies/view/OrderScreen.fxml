@@ -33,7 +33,6 @@
             <Label font="$x1" layoutX="14.0" text="Orders" AnchorPane.topAnchor="5.0" />
             <ListView fx:id="Orders" prefHeight="225.0" prefWidth="274.0" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="60.0" />
             <ListView fx:id="OrdersInfo" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0" />
-            <Button fx:id="Delete" mnemonicParsing="false" text="Delete" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="555.0" />
             <Button fx:id="Delivered" mnemonicParsing="false" text="Delivered" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="555.0" />
           </children>
         </AnchorPane>
