@@ -201,8 +201,7 @@ package kookies.model;
     			e.printStackTrace();
     		}
 	    }
-	    //TODO an order no longer has deliverytimestamp 
-	    //TODO should change db procedure to load delivered
+
 	    public void placeOrder(Order order){
 	    	String customer = order.getCustomer().getName();
 	    	String expDate = order.getExpectedDeliveryDate();
@@ -272,14 +271,14 @@ package kookies.model;
     					undeliveredRS.getString(3)
     				);
     				o.setOrderNbr(undeliveredRS.getInt(2));
-    				System.out.println("Form DB:");
-    				for(Integer i : getNbrPallets(o.getOrderNbr())){
-    					System.out.println(i);
-    				}
     				o.setPalletTotals(getCookieList(), getNbrPallets(o.getOrderNbr()));
-    				//for(Pallet p : getPalletsByOrderNbr(o.getOrderNbr())){
-    				//	o.addPalletToOrder(p);
-    				//}
+    				for(Pallet p : getPalletsByOrderNbr(o.getOrderNbr())){
+    					System.out.println("Pallet from db: " + p.getPalletNbr());
+    					o.addPalletToOrder(p);
+    				}
+    				for(String s : o.palletsInOrder()){
+    					System.out.println("order from db: " + s);
+    				}
     				undeliveredList.add(o);
     			}
     		}catch(Exception e){
@@ -289,8 +288,32 @@ package kookies.model;
 		}
 		
 		public List<Pallet> getPalletsByOrderNbr(int orderNbr){
+			System.out.println("getPalletsByOrderNbr(): " + orderNbr);
 			ArrayList<Pallet> pallets = new ArrayList<Pallet>();
-			//TODO
+			String palletsByOrderNbr = "select * from pallets where orderNbr = " + orderNbr;
+			try{
+				System.out.println("try");
+	    		Statement statement = conn.createStatement();
+	    		ResultSet palletsRS = statement.executeQuery(palletsByOrderNbr);
+	    		System.out.println("result set");
+	    		int i = 1;
+	    		while(palletsRS.next()){
+	    			System.out.println("while " + i);
+	    			Pallet p = new Pallet(
+    						palletsRS.getInt(1), 
+    						new Cookie(palletsRS.getString(3)), 
+    						palletsRS.getDate(2) + " " + palletsRS.getTime(2),
+    						palletsRS.getInt(4),
+    						palletsRS.getBoolean(5),
+    						palletsRS.getBoolean(6));
+	    			System.out.println(p.getPalletNbr());
+	    			pallets.add(p);
+	    			i++;
+	    		}
+	    		statement.close();
+	    	}catch(Exception e){
+	    		e.printStackTrace();
+	    	}
 			return pallets;
 		}
 		

@@ -47,6 +47,17 @@ public class Order {
 		return totals;
 	}
 	
+	public List<String> palletsInOrder(){
+		ArrayList<String> palletsInOrder = new ArrayList<String>();
+		for(Cookie c : pallets.keySet()){
+			for(Pallet p : pallets.get(c)){
+				if(p != null)
+				palletsInOrder.add(Integer.toString(p.getOrderNbr()));
+			}
+		}		
+		return palletsInOrder;
+	}
+	
 	public void setPalletTotals(List<Cookie> typeOfCookie, List<Integer> number){
 		for(int i = 0 ; i < typeOfCookie.size() ; i++){
 			pallets.put(typeOfCookie.get(i), new Pallet[number.get(i)]);
@@ -93,7 +104,8 @@ public class Order {
 	
 	public List<String> getOrderDetails(){
 		ArrayList<String> orderDetails = new ArrayList<String>();
-		orderDetails.add("Deliver to: " + customer.getName() + " in " + customer.getAddress() + " by " + expectedDeliveryDate);
+		orderDetails.add(customer.getName() + " : " + customer.getAddress());
+		orderDetails.add("by " + expectedDeliveryDate);
 		for(Cookie palletType : pallets.keySet()){
 			Pallet[] palletArray = pallets.get(palletType);
 			orderDetails.add(palletArray.length + " pallet(s) of " + palletType.getName());
