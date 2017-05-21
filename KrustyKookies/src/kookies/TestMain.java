@@ -38,7 +38,11 @@ public class TestMain {
 		for(Order o : testOrder){
 			System.out.println(o.getOrderNbr() + " " + o.getExpectedDeliveryDate());
 			for(int i : o.getPalletTotals()){
-				System.out.println(i);
+				System.out.print("[" + i + "] ");
+			}
+			System.out.println("");
+			for(String s : o.getOrderDetails()){
+				System.out.println(s);
 			}
 		}
 

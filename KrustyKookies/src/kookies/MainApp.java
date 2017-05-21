@@ -88,7 +88,7 @@ public class MainApp extends Application {
 			StorageController controller = loader.getController();
 			controller.setMainApp(this);
 		}catch(IOException e){
-			System.out.println("PRODUCTION SCREEN EXCEPTION");
+			System.out.println("STORAGE SCREEN EXCEPTION");
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class MainApp extends Application {
 			OrderController controller = loader.getController();
 			controller.setMainApp(this);
 		}catch(IOException e){
-			System.out.println("PRODUCTION SCREEN EXCEPTION");
+			System.out.println("ORDER SCREEN EXCEPTION");
 		}
 	}
 	
